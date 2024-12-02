@@ -1,0 +1,48 @@
+/* Container for the line chart to match the BarChart's look */
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4f7f6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 30px auto;
+    width: 85%;
+    max-width: 1000px;
+    border: 2px solid #ddd; /* Border to match BarChart */
+  }
+  
+  /* Title of the chart */
+  .chart-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Style the surface of the chart to add a border, shadow, etc. */
+  .recharts-surface {
+    border-radius: 8px; /* Rounded corners */
+    border: 2px solid #ddd; /* Same border style as BarChart */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    background: #fff; /* White background */
+  }
+  
+  /* X and Y axis label styling */
+  .recharts-cartesian-axis-tick {
+    font-size: 12px;
+    color: #666;
+  }
+  
+  /* Styling the tooltip and legend */
+  .recharts-tooltip-wrapper {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .recharts-legend-item {
+    font-size: 14px;
+    color: #333;
+  }
+  

@@ -1,0 +1,61 @@
+/* Container styling */
+.metrics-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #f8f9fa; /* Light gray background for the entire section */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .metrics-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #2c3e50; /* Dark gray for the heading */
+  }
+  
+  /* Card container */
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  /* Card styling */
+  .card {
+    background-color: #ffffff; /* White background for cards */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 180px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    background-color: #e8f0fe; /* Light blue on hover */
+  }
+  
+  .card h3 {
+    font-size: 1.2rem;
+    color: #1a237e; /* Deep blue for titles */
+    margin-bottom: 10px;
+  }
+  
+  .card p {
+    font-size: 1.1rem;
+    color: #555555; /* Medium gray for text */
+    margin: 0;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 600px) {
+    .card {
+      width: 100%;
+    }
+  }
+  

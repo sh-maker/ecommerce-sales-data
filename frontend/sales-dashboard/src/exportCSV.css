@@ -1,0 +1,45 @@
+/* Container for the export button */
+.export-button-container {
+    display: flex;
+    justify-content: flex-end;  /* Align the button to the right */
+    margin-top: 20px;
+  }
+  
+  /* Styling the export button */
+  .export-button {
+    padding: 8px 15px;
+    background-color: #388e3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .export-button:hover {
+    background-color: #388e3c;
+  }
+  
+  /* Hide the button if no data is available */
+  .export-button-container.hidden {
+    display: none;
+  }
+  
+  /* Button active effect */
+  .export-button:active {
+    background-color: #388e3c;
+  }
+  
+  /* Disabled button styling */
+  .export-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  /* Button focus effect (for accessibility) */
+  .export-button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
