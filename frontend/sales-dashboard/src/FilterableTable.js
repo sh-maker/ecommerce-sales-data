@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import ExportVisibleDataButton from "./exportCSV";
-import './FilterableTable.css'; // Import the new CSS file
+import './FilterableTable.css'; // Import the CSS file
 
 const FilterableTable = () => {
   const [data, setData] = useState([]);
@@ -39,7 +39,7 @@ const FilterableTable = () => {
       platform: "",
       state: "",
     });
-    setData([]); // Optionally clear the data as well
+    setData([]); // clear the data as well
   };
 
   return (
@@ -95,7 +95,7 @@ const FilterableTable = () => {
         <thead>
           <tr>
             <th>Order ID</th>
-            <th>Product Name</th>
+            <th>Category</th>
             <th>Platform</th>
             <th>Quantity Sold</th>
             <th>Selling Price</th>
@@ -108,7 +108,7 @@ const FilterableTable = () => {
           {data.map((row, index) => (
             <tr key={index}>
               <td>{row.order_id}</td>
-              <td>{row.product__product_name}</td>
+              <td>{row.product__category}</td>
               <td>{row.platform}</td>
               <td>{row.quantity_sold}</td>
               <td>{row.selling_price}</td>

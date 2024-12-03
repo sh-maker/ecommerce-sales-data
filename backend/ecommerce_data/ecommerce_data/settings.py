@@ -86,26 +86,19 @@ WSGI_APPLICATION = 'ecommerce_data.wsgi.application'
 #     }
 # }
 
+# Database Credentials
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ecommerce_data',
-        'USER': 'root',
-        'PASSWORD': 'root@123',
-        'HOST': 'localhost',
+        'NAME': 'YOUR_DATABASE_NAME',
+        'USER': 'YOUR_DATABASE_ROOT',
+        'PASSWORD': 'YOUR_PASSOWRD',
+        'HOST': 'YOUR_HOSTAME',
         'PORT': '3306',
     }
 }
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default='postgresql://ecommerce_data_5bk8_user:WzLSMyT9xFq4MeqEti2rH8o5qTU1JV0b@dpg-ct6lju3v2p9s739kb1dg-a.singapore-postgres.render.com/ecommerce_data_5bk8',
-#         conn_max_age=300
-#     )
-    
-# }
-# DATABASES = {
-#     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'), conn_max_age=300)
-# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -150,8 +143,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Enabling CORS
 CORS_ALLOW_ALL_ORIGINS = True
 
+# Allowing all Cors Methods
 CORS_ALLOW_METHODS = [
     'GET',
     'POST',

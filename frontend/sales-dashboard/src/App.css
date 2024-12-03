@@ -1,10 +1,10 @@
-/* Overall body and layout */
+/* Overall body and layout */ 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f7fa; /* Light background color */
-  color: #333; /* Dark text for readability */
+  background-color: #f4f7fa; 
+  color: #333; 
 }
 
 /* App container */
@@ -12,8 +12,8 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #ffffff; /* White background for the main container */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow around the container */
+  background-color: #ffffff; 
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
   border-radius: 8px;
   overflow: hidden;
 }

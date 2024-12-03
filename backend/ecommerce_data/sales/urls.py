@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import ImportCSVView,LineChartView, BarChartView, FilterableDataTableView, SummaryMetricsView
 
+# API Urls
 urlpatterns = [
     path('import-csv/', ImportCSVView.as_view(), name='import-csv'),
     path("line-chart/", LineChartView.as_view(), name="line_chart"),

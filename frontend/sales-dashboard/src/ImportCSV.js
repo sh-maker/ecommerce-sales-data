@@ -69,11 +69,6 @@ const ImportCSV = () => {
                 </div>
             )}
 
-            {/* CSV Upload Form */}
-            {/* <form onSubmit={handleSubmit}>
-        <input type="file" accept=".csv" onChange={handleFileChange} />
-        <button type="submit">Import Data</button>
-      </form> */}
             <form onSubmit={handleSubmit} className="mb-3">
                 <div className="row">
 

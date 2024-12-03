@@ -11,7 +11,7 @@ const ExportVisibleDataButton = ({ visibleData }) => {
     // Create CSV content
     const headers = [
       "Order ID",
-      "Product Name",
+      "Category",
       "Platform",
       "Quantity Sold",
       "Selling Price",
@@ -24,7 +24,7 @@ const ExportVisibleDataButton = ({ visibleData }) => {
       csvRows.push(
         [
           row.order_id,
-          row.product__product_name,
+          row.product__category,
           row.platform,
           row.quantity_sold,
           row.selling_price,

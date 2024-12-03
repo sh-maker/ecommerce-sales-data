@@ -1,14 +1,14 @@
 /* Filterable Table Container */
 .filterable-table-container {
     max-width: 1200px;
-    margin: 0 auto; /* Center align the container */
+    margin: 0 auto; 
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center all contents inside the container */
+    align-items: center; 
   }
   
   /* Center the Title */
@@ -26,7 +26,7 @@
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    justify-content: center; /* Center the filter inputs */
+    justify-content: center; 
   }
   
   .filters-section input {
@@ -96,7 +96,7 @@
   .filters-section .buttons-container {
     display: flex;
     gap: 10px;
-    justify-content: center; /* Ensure both buttons are side by side and centered */
+    justify-content: center; 
     margin-top: 10px;
   }
   

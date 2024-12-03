@@ -13,6 +13,8 @@ import logging
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+
+# API for importing CSV file to database
 @method_decorator(csrf_exempt, name="dispatch")
 class ImportCSVView(View):
     def post(self, request):
@@ -29,6 +31,7 @@ class ImportCSVView(View):
                     return JsonResponse({'error': f'Invalid file format: {csv_file.name}. Please upload a CSV file.'}, status=400)
 
                 logger.info(f'Processing file: {csv_file.name}')
+
                 # Process each file
                 self._process_csv_file(csv_file)
 
@@ -40,7 +43,8 @@ class ImportCSVView(View):
             return JsonResponse({'error': str(e)}, status=500)
 
     def _process_csv_file(self, csv_file):
-        """Processes a single CSV file."""
+
+        # Process a single file
         file_data = csv_file.read().decode('utf-8').splitlines()
         csv_reader = csv.DictReader(file_data)
 
@@ -49,8 +53,9 @@ class ImportCSVView(View):
             error_msg = f'Platform column not found in {csv_file.name}'
             logger.error(error_msg)
             raise ValueError(error_msg)
-
-        with transaction.atomic():  # Wrap the entire processing in a transaction
+        
+        # Wrap the entire processing in a transaction
+        with transaction.atomic():  
             products = []
             customers = []
             orders = []
@@ -92,15 +97,15 @@ class ImportCSVView(View):
             Order.objects.bulk_create(orders, ignore_conflicts=True)
             Delivery.objects.bulk_create(deliveries, ignore_conflicts=True)
 
+    # Detects the platform column from the CSV headers.
     def _detect_platform(self, headers):
-        """Detects the platform column from the CSV headers."""
         for header in headers:
             if header.lower() == 'platform':
                 return header
         return None
 
+    # Parses a date string and converts it to 'YYYY-MM-DD' format.
     def _parse_date(self, date_str):
-        """Parses a date string and converts it to 'YYYY-MM-DD' format."""
         try:
             # Try parsing as DD-MM-YY
             return datetime.strptime(date_str, "%d-%m-%y").strftime("%Y-%m-%d")
@@ -111,15 +116,15 @@ class ImportCSVView(View):
             except ValueError:
                 raise ValueError(f"Invalid date format: {date_str}")
 
+    # Create or get product object.
     def _get_or_create_product(self, row):
-        """Create or get product object."""
         return Product.objects.get_or_create(
             product_id=row['ProductID'],
             defaults={'product_name': row['ProductName'], 'category': row['Category']}
         )[0]
 
+    # Create or get customer object.
     def _get_or_create_customer(self, row):
-        """Create or get customer object."""
         return Customer.objects.get_or_create(
             customer_id=row['CustomerID'],
             defaults={
@@ -129,8 +134,8 @@ class ImportCSVView(View):
             }
         )[0]
 
+    # Prepare order data based on platform.
     def _prepare_order_data(self, row, product, customer, platform, date_of_sale):
-        """Prepare order data based on platform."""
         order_data = {
             'product': product,
             'customer': customer,
@@ -153,15 +158,15 @@ class ImportCSVView(View):
 
         return order_data
 
+    # Create or get order object
     def _get_or_create_order(self, row, order_data):
-        """Create or get order object."""
         return Order.objects.get_or_create(
             order_id=row['OrderID'],
             defaults=order_data
         )[0]
 
+    # Prepare delivery data
     def _prepare_delivery(self, order, delivery_date, row, street, city, state_pincode):
-        """Prepare delivery data."""
         return Delivery(
             order=order,
             delivery_date=delivery_date,
@@ -171,8 +176,8 @@ class ImportCSVView(View):
             delivery_address_state=state_pincode,
         )
 
+    # Splits the address into street, city, and state-pincode
     def _split_address(self, address):
-        """Splits the address into street, city, and state-pincode."""
         try:
             parts = address.split(',')
             street = parts[0].strip()  # First part is the street
@@ -183,9 +188,9 @@ class ImportCSVView(View):
             logger.error(f"Error splitting address '{address}': {str(e)}")
             return address, None, None
 
+# API to fetch monthly sales volume (Quantity Sold)
 @method_decorator(csrf_exempt, name="dispatch")
 class LineChartView(View):
-    """API to fetch monthly sales volume (Quantity Sold)."""
 
     def get(self, request):
         data = (
@@ -198,10 +203,9 @@ class LineChartView(View):
         response = [{"month": f"{item['year']}-{item['month']:02}", "quantity_sold": item["total_quantity"]} for item in data]
         return JsonResponse(response, safe=False)
 
-
+# API to fetch monthly revenue (Total Sale Value)
 @method_decorator(csrf_exempt, name="dispatch")
 class BarChartView(View):
-    """API to fetch monthly revenue (Total Sale Value)."""
 
     def get(self, request):
         data = (
@@ -214,10 +218,9 @@ class BarChartView(View):
         response = [{"month": f"{item['year']}-{item['month']:02}", "revenue": item["total_revenue"]} for item in data]
         return JsonResponse(response, safe=False)
 
-
+# API to retrieve sales data with filtering options
 @method_decorator(csrf_exempt, name="dispatch")
 class FilterableDataTableView(View):
-    """API to retrieve sales data with filtering options."""
 
     def get(self, request):
         filters = {}
@@ -246,7 +249,7 @@ class FilterableDataTableView(View):
 
         data = Order.objects.filter(**filters).values(
             "order_id",
-            "product__product_name",
+            "product__category",
             "platform",
             "quantity_sold",
             "selling_price",
@@ -257,10 +260,9 @@ class FilterableDataTableView(View):
 
         return JsonResponse(list(data), safe=False)
 
-
+# API to fetch summary metrics
 @method_decorator(csrf_exempt, name="dispatch")
 class SummaryMetricsView(View):
-    """API to fetch summary metrics."""
 
     def get(self, request):
         total_revenue = Order.objects.aggregate(total_revenue=Sum(F("quantity_sold") * F("selling_price")))["total_revenue"] or 0

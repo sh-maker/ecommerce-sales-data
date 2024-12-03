@@ -35,7 +35,6 @@ const LineChartComponent = ({ refreshKey }) => {
 
       {!loading && !error && (
         <LineChart width={800} height={400} data={data}>
-          {/* Increased width and height */}
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="month" />
           <YAxis />
